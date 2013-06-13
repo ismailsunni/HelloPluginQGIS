@@ -31,3 +31,16 @@ class HelloPluginDialog(QtGui.QDialog):
         # Set up the user interface from Designer.
         self.ui = Ui_HelloPlugin()
         self.ui.setupUi(self)
+
+        helloButton = self.ui.OKPushButton
+        QtCore.QObject.connect(helloButton, QtCore.SIGNAL('clicked()'),
+                               self.sayHello)
+
+    def sayHello(self):
+        name = self.ui.nameLineEdit.text()
+        greeting = ''
+        if name == '':
+            greeting = 'Hello World'
+        else:
+            greeting = 'Hello ' + name
+        self.ui.outputPlainTextEdit.setPlainText(greeting)
